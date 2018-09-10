@@ -1,25 +1,16 @@
 package br.eriquim.homerun.dom;
 
-import java.io.Serializable;
-
-public class Marca implements Serializable{
+public class Marca extends PersistenceDB{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3667316394750413117L;
 	
-	private int id;
 	
 	private String nome;
 	
 	private String sigla;
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String getNome() {
 		return nome;
 	}

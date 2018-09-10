@@ -7,15 +7,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-import br.eriquim.homerun.dao.MarcaDAO;
-import br.eriquim.homerun.dao.ModeloDAO;
 import br.eriquim.homerun.dom.Marca;
 import br.eriquim.homerun.dom.Modelo;
 import br.eriquim.homerun.service.MarcaServiceImpl;
@@ -48,6 +48,15 @@ public class CadastroMB {
 	
 	public MarcaServiceImpl marcaService;
 	
+	private void addSucessoMsg(String mensagem) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,mensagem, 
+        		mensagem));
+	}
+	private void addErrorMsg (String mensagem) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,mensagem, 
+				mensagem));
+	}
+	
 	
 	public CadastroMB() {
 		reset();
@@ -74,6 +83,7 @@ public class CadastroMB {
 			listaMarcas =marcaService.findAll();
 			dtModelMarcas = new ListDataModel<Marca>(listaMarcas);
 		} catch (SQLException e) {
+			addErrorMsg("Erro ao iniciar cadastro de Marca");
 			e.printStackTrace();
 		}
 		return CRUD_MARCA;
@@ -86,6 +96,7 @@ public class CadastroMB {
 			listaModelos = modeloService.findAll();
 			dtModelModelos = new ListDataModel<Modelo>(listaModelos);
 		} catch (SQLException e) {
+			addErrorMsg("Erro ao iniciar o cadastro de Modelo.");
 			e.printStackTrace();
 		}
 		return CRUD_MODELO;
@@ -95,10 +106,13 @@ public class CadastroMB {
 		try {
 			if(marca.getId()==0) {
 				marcaService.inserir(marca);
+				addSucessoMsg("Marca inserida com sucesso.");
 			} else {
 				marcaService.update(marca);
+				addSucessoMsg("Marca alterarda com sucesso.");
 			}
 		} catch (SQLException e) {
+			addErrorMsg("Erro ao inserir ou alterar marca.");
 			e.printStackTrace();
 		}
 		return cadastroMarca();
@@ -108,10 +122,13 @@ public class CadastroMB {
 		try {
 			if(modelo.getId()==0) {
 				modeloService.inserir(modelo);
+				addSucessoMsg("Modelo inserido com sucesso.");
 			} else {
 				modeloService.update(modelo);
+				addSucessoMsg("Modelo alterado com sucesso.");
 			}
 		} catch (SQLException e) {
+			addErrorMsg("Erro ao inserir ou alterar modelo.");
 			e.printStackTrace();
 		}
 		return cadastroModelo();
@@ -123,7 +140,7 @@ public class CadastroMB {
 		try {
 			marca = marcaService.findById(marcaAux.getId());
 			listaMarcas = marcaService.findAll();
-			dtModelMarcas = new ListDataModel(listaMarcas);
+			dtModelMarcas = new ListDataModel<Marca>(listaMarcas);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
@@ -137,7 +154,7 @@ public class CadastroMB {
 		try {
 			modelo = modeloService.findById(modeloAux.getId());
 			listaModelos = modeloService.findAll();
-			dtModelModelos = new ListDataModel(listaModelos);
+			dtModelModelos = new ListDataModel<Modelo>(listaModelos);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
@@ -148,6 +165,7 @@ public class CadastroMB {
 		Marca marcaAux = dtModelMarcas.getRowData();
 		try {
 			marcaService.remove(marcaAux);
+			addSucessoMsg("Marca removida com sucesso");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
@@ -159,6 +177,7 @@ public class CadastroMB {
 		Modelo modeloAux = dtModelModelos.getRowData();
 		try {
 			modeloService.remove(modeloAux);
+			addSucessoMsg("Modelo removido com sucesso");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 

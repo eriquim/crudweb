@@ -1,15 +1,12 @@
 package br.eriquim.homerun.dom;
 
-import java.io.Serializable;
-
-public class Modelo implements Serializable{
+public class Modelo extends PersistenceDB{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4770571406554985036L;
 	
 	
-	private int id;
 	private String nome;
 	private int ano;
 	private Marca marca;
@@ -18,12 +15,6 @@ public class Modelo implements Serializable{
 		marca = new Marca();
 	}
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String getNome() {
 		return nome;
 	}

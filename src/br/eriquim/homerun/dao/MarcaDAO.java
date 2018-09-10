@@ -14,7 +14,7 @@ public class MarcaDAO extends GenericDAO<Marca> {
 
 	@Override
 	public List<Marca> getAll() throws SQLException {
-		List<Marca> retorno = new ArrayList();
+		List<Marca> retorno = new ArrayList<Marca>();
 		
 		String sql = "select * from public2.marca";
 		PreparedStatement pst = null;

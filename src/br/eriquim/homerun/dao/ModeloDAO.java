@@ -14,7 +14,7 @@ public class ModeloDAO extends GenericDAO<Modelo> {
 
 	@Override
 	public List<Modelo> getAll() throws SQLException {
-		List<Modelo> retorno = new ArrayList();
+		List<Modelo> retorno = new ArrayList<Modelo>();
 		String sql = "select * from public2.modelo";
 		MarcaDAO dao = new MarcaDAO();
 		PreparedStatement pst = getConnection().prepareStatement(sql);

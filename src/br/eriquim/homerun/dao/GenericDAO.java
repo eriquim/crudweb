@@ -9,6 +9,10 @@ import javax.annotation.PreDestroy;
 
 public abstract class GenericDAO<T> implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5550185214144407664L;
 	private Connection connection;
 	
 	public GenericDAO() {
