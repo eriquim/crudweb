@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+		<title>CRUD - Marca</title>
+	</h:head>
+	<h:body>
+		<h:form id="form">
+		<h2><h:commandLink action="#{cadastroMB.inicio}" value="Página Inicial" /> - Marca</h2>
+		<h:messages id="mensagens" globalOnly="true" />
+			<h:panelGroup header="Marca" style="width:800px; margin-top:100px;">
+				<h:panelGrid columns="1">
+					<h:panelGroup header="Marca" style="width:400px; margin-top:100px;">
+						<h:panelGrid columns="2">
+							<h:column>
+								<h:outputText value="Marca: " />
+							</h:column>
+							<h:column>
+								<h:inputText value="#{cadastroMB.marca.nome}" />
+							</h:column>
+							<h:column>
+								<h:outputText value="Sigla: " />
+							</h:column>
+							<h:column>
+								<h:inputText value="#{cadastroMB.marca.sigla}" />
+							</h:column>
+						</h:panelGrid>
+					</h:panelGroup>
+					<f:facet name="footer">
+						<h:commandButton action="#{cadastroMB.salvarMarca}" 
+							value="Salvar/Atualizar" />
+						<h:commandButton action="#{cadastroMB.inicio}"
+							value="Cancelar" />
+					</f:facet>
+				</h:panelGrid>
+			</h:panelGroup>
+			<h:panelGroup header="Marcas Existentes" style="width:800px; margin-top:100px;">
+				<h3>Marcas Existentes</h3>
+				<h:dataTable value="#{cadastroMB.dtModelMarcas}" var="_marca" title="Marcas Existentes">
+					
+					<h:column>
+						<h:outputText value="#{_marca.id} " />
+					</h:column>
+					<h:column>
+						<h:inputText value="#{_marca.nome}" />
+					</h:column>
+					<h:column>
+						<h:outputText value="#{_marca.sigla}" />
+					</h:column>
+					<h:column>
+						<h:commandLink id="editar_#{_marca.id}"  actionListener="#{cadastroMB.editarMarca}" value="Editar " />
+						<h:commandLink id="excluit_#{_marca.id}" type="button" action="#{cadastroMB.removerMarca}" value="Excluir " />
+					</h:column>
+				</h:dataTable>
+			</h:panelGroup>
+		</h:form>
+	</h:body>
+</html>

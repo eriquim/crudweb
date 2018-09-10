@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+
+<h:head>
+		<title>CRUD - Modelo</title>
+	</h:head>
+	<h:body>
+		<h:form id="form">
+		<h2><h:commandLink action="#{cadastroMB.inicio}" value="Página Inicial" /> - Modelo </h2>
+		<h:messages id="mensagens" globalOnly="true" />
+			<h:panelGroup header="Modelo" style="width:800px; margin-top:100px;">
+				<h:panelGrid columns="1">
+					<h:panelGroup header="Marca" style="width:400px; margin-top:100px;">
+						<h:panelGrid columns="2">
+							<h:column>
+								<h:outputText value="Marca: " />
+							</h:column>
+							<h:column>
+								<h:selectOneListbox value="#{cadastroMB.modelo.marca.id}">
+									<f:selectItem itemLabel="Selecione..." />
+									<f:selectItems value="#{cadastroMB.allMarcasSelectItem}" />
+								</h:selectOneListbox>
+							</h:column>
+						</h:panelGrid>
+					</h:panelGroup>
+					<h:panelGrid columns="2">
+						<h:column>
+							<h:outputText value="Descrição: " />
+						</h:column>
+						<h:column>
+							<h:inputText value="#{cadastroMB.modelo.nome}" />
+						</h:column>
+						<h:column>
+							<h:outputText value="Ano de Fabricação: " />
+						</h:column>
+						<h:column>
+							<h:inputText value="#{cadastroMB.modelo.ano}" />
+						</h:column>
+					</h:panelGrid>
+					<f:facet name="footer">
+						<h:commandButton actionListener="#{cadastroMB.salvarModelo}" 
+							value="Salvar/Atualizar" />
+						<h:commandButton actionListener="#{cadastroMB.inicio}"
+							value="Cancelar" />
+					</f:facet>
+				</h:panelGrid>
+				<h:panelGroup header="Marcas Existentes" style="width:800px; margin-top:100px;">
+				<h3>Modelos Existentes</h3>
+				<h:dataTable value="#{cadastroMB.dtModelModelos}" var="_modelo" title="Modelos Existentes">
+					<h:column>
+						<h:outputText value="#{_modelo.id} " />
+					</h:column>
+					<h:column>
+						<h:outputText value="Marca: #{_modelo.marca.nome} - #{_modelo.marca.sigla}" />
+					</h:column>
+					<h:column>
+						<h:inputText value="#{_modelo.nome}" />
+					</h:column>
+					<h:column>
+						<h:outputText value="#{_modelo.ano}" />
+					</h:column>
+					<h:column>
+						<h:commandLink id="editar_#{_modelo.id}"  actionListener="#{cadastroMB.editarModelo}" value="Editar " />
+						<h:commandLink id="excluit_#{_modelo.id}" actionListener="#{cadastroMB.removerModelo}" value="Excluir " />
+					</h:column>
+				</h:dataTable>
+			</h:panelGroup>
+			</h:panelGroup>
+		</h:form>
+</h:body>
+</html>
