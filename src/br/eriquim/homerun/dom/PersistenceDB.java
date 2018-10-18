@@ -5,6 +5,8 @@ package br.eriquim.homerun.dom;
 
 import java.io.Serializable;
 
+import br.eriquim.homerun.exception.BussinessException;
+
 /**
  * @author eriquim
  *
@@ -24,5 +26,7 @@ public abstract class PersistenceDB implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public abstract void validate() throws BussinessException;
 
 }

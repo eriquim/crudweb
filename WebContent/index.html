@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<title>Tarefas by Eric</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+<link rel="stylesheet" href="./lib/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+.w3-sidenav a,.w3-sidenav h4 {font-weight:bold}
+</style>
+<body class="w3-light-grey w3-content" style="max-width:1600px">
+
+
+<div class="w3-main">
+
+
+  <header class="w3-container">
+   <span class="w3-opennav w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+    <h1><b>Tarefas</b></h1>
+  </header>
+  
+  <div class="w3-row-padding">
+    <div class="w3-third w3-container w3-margin-bottom">
+      <div class="w3-container w3-white">
+        <p><b>Nova Tarefa</b></p>
+        <p>
+	   <label>Tarefa: </label>
+		<input id="nome" type="text"> <br/>
+           <label>Responsável: </label>
+		<input id="responsavel" type="text"> <br/>
+           <button id="addbtn" onclick="inserir();">+</button>
+	</p>
+      </div>
+    </div>
+  </div>
+  <div class="w3-row-padding">
+    <div class="w3-third w3-container w3-margin-bottom">
+      <div class="w3-container w3-white">
+          <p><b>A fazer</b></p>
+         <ul id="to_do"></ul>
+      </div>
+    </div>
+    <div class="w3-third w3-container w3-margin-bottom">
+     <div class="w3-container w3-white">
+         <p><b>Fazendo</b></p>
+         <ul id="doing"></ul>
+      </div>
+    </div>
+    <div class="w3-third w3-container">
+      <div class="w3-container w3-white">
+        <p><b>Feito</b></p>
+        <ul id="done"></ul>
+      </div>
+    </div>
+  </div>
+
+
+  <footer class="w3-container w3-padding-hor-32 w3-white">
+  <div class="w3-row-padding">
+    <div class="w3-third">
+      <h3>TJRN/Imd/UFRN</h3>
+      <p>Disciplina de Desenvolvimento Web 2 - Prof. Jair Cavalcanti.</p>
+      <p>Powered by W3.css</p>
+    </div>
+  </div>
+  </footer>
+</div>
+		<script type="text/javascript" src="funcoes_ajax.js"></script>
+</body>
+</html>

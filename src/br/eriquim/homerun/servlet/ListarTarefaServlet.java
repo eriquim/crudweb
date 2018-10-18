@@ -10,42 +10,39 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.eriquim.homerun.dom.Marca;
-import br.eriquim.homerun.service.MarcaServiceImpl;
+import com.google.gson.Gson;
 
-@WebServlet("/marcaServlet")
-public class MarcaServlet extends HttpServlet {
+import br.eriquim.homerun.dom.Tarefa;
+import br.eriquim.homerun.exception.BussinessException;
+import br.eriquim.homerun.service.TarefaServiceImpl;
+
+@WebServlet("/getTarefaAllServlet")
+public class ListarTarefaServlet extends HttpServlet {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4855239982108790501L;
 
-	private MarcaServiceImpl marcaService;
+	private TarefaServiceImpl tarefaServlet;
 
 	public void init() throws ServletException {
-		marcaService = new MarcaServiceImpl();
+		tarefaServlet = new TarefaServiceImpl();
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
-		
-		String nome = request.getParameter("nome");
-		String sigla = request.getParameter("sigla");
-		
-		Marca marca = new Marca();
-		marca.setNome(nome);
-		marca.setSigla(sigla);
-		
-		PrintWriter out = response.getWriter();
+		 String json = null;
 		try {
-			marcaService.inserir(marca);
+			json = new Gson().toJson(tarefaServlet.findAll());
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter out = response.getWriter();
+			out.print(json);
+			out.flush();
 		} catch (SQLException e) {
-			out.println("<h1> Erro ao inserir a marca. Verifique os dados e tente novamente.</h1>");
 			e.printStackTrace();
 		}
 
-		out.println("<h1> Dado Inserido com sucesso.</h1>");
 	}
 	
 	@Override
@@ -54,7 +51,7 @@ public class MarcaServlet extends HttpServlet {
 	}
 
 	public void destroy() {
-		marcaService = null;
+		tarefaServlet = null;
 	}
 
 }
